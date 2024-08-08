@@ -21,7 +21,7 @@ public class CardsController {
         return ResponseEntity.ok(cardService.activateById(cardNumber, pin));
     }
 
-    @PatchMapping("/changepin/{cardNumber}?pin={pin}&new={new}")
+    @PatchMapping("/change/pin/{cardNumber}?pin={pin}&new={new}")
     public ResponseEntity<Boolean> changePinByCardNumber(@PathVariable String cardNumber, @RequestParam("pin") String oldPin, @RequestParam("new") String newPin) {
         return ResponseEntity.ok(cardService.changePinByCardNumber(cardNumber, oldPin, newPin));
     }

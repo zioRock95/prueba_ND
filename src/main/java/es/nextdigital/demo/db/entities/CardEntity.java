@@ -24,6 +24,8 @@ public class CardEntity implements Serializable {
     @Column(nullable = false, unique = true)
     private String cardNumber;
 
+    @Column(nullable = false)
+    private Integer maxWithdrawAmount;
 
     @Column(nullable = false)
     @Convert(converter = DbCypher.class)

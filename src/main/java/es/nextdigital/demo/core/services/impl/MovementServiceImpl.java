@@ -48,6 +48,11 @@ public class MovementServiceImpl implements MovementService {
         if (!card.isActive()) {
             return false;
         }
+
+        if (card.getMaxWithdrawAmount() < amount) {
+            return false;
+        }
+
         var cuenta = card.getCuentasEntity();
 
         var floatAmount = amount.doubleValue();
