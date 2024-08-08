@@ -30,4 +30,5 @@ public class MovementsController {
     public ResponseEntity<Boolean> insertByCardNumber(@PathVariable String cardNumber, @RequestParam("amount") Integer amount) {
         return ResponseEntity.ok(true);
     }
+
 }
