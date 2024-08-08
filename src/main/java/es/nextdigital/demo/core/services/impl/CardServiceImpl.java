@@ -2,7 +2,7 @@ package es.nextdigital.demo.core.services.impl;
 
 import es.nextdigital.demo.core.services.CardService;
 import es.nextdigital.demo.db.dao.CardDAO;
-import es.nextdigital.demo.utils.CypherUtils;
+import es.nextdigital.demo.utils.EncryptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +12,10 @@ public class CardServiceImpl implements CardService {
     @Autowired
     CardDAO cardDAO;
 
+    // to be fair a different decryption from data sent from/to web and from/to bdd it's better
+    @Autowired
+    EncryptionUtil encryptionUtil;
+
     @Override
     public boolean activateById(String cardNumber, String pin) {
         var card = cardDAO.findByCardNumber(cardNumber).orElseThrow();
@@ -20,7 +24,7 @@ public class CardServiceImpl implements CardService {
             return true; // or false? depends really on what should happen if we are trying to activate an already activated card
         }
 
-        var decPin = CypherUtils.decypherPin(pin);
+        var decPin = encryptionUtil.decrypt(pin);
         if (decPin.equals(card.getPinNumber())) {
             card.setActive(true);
         } else {
@@ -42,9 +46,9 @@ public class CardServiceImpl implements CardService {
             return true; // Technically it's updated :D (really should send a message warning the user)
         }
 
-        var decOldPin = CypherUtils.decypherPin(oldPin);
+        var decOldPin = encryptionUtil.decrypt(oldPin);
         if (decOldPin.equals(card.getPinNumber())) {
-            var decNewPin = CypherUtils.decypherPin(newPin);
+            var decNewPin = encryptionUtil.decrypt(newPin);
             card.setPinNumber(decNewPin);
         } else {
             return false;

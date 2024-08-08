@@ -9,6 +9,7 @@ import es.nextdigital.demo.db.entities.MovementsEntity;
 import es.nextdigital.demo.db.mappers.MovementDTO;
 import es.nextdigital.demo.models.ECardType;
 import es.nextdigital.demo.models.EMovementType;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,5 +1,6 @@
 package es.nextdigital.demo.db.entities;
 
+import es.nextdigital.demo.utils.DbCypher;
 import es.nextdigital.demo.models.ECardType;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -23,9 +24,9 @@ public class CardEntity implements Serializable {
     @Column(nullable = false, unique = true)
     private String cardNumber;
 
-    // implement encrypt decrypt on read/write operation
-    // use key from ppty file that will read it from env var setup outside docker image
+
     @Column(nullable = false)
+    @Convert(converter = DbCypher.class)
     private String pinNumber;
 
     @Column(nullable = false)
