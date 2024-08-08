@@ -22,6 +22,12 @@ public class CuentasEntity implements Serializable {
     @Column(nullable = false)
     private String displayName;
 
+    @Column(nullable = false)
+    private Integer maxAmount;
+
+    @Column(nullable = false)
+    private Double balance;
+
     @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<MovementsEntity> movements;
 

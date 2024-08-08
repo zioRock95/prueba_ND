@@ -14,7 +14,7 @@ public class MovementsEntity implements Serializable {
 
     @GeneratedValue
     @Id
-    private Long id;
+    Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cuenta_id", nullable = false)
@@ -25,5 +25,11 @@ public class MovementsEntity implements Serializable {
 
     @Column(nullable = false)
     private double value;
+
+    public MovementsEntity(CuentasEntity cuenta, EMovementType type, double value) {
+        this.cuenta = cuenta;
+        this.type = type;
+        this.value = value;
+    }
 
 }
